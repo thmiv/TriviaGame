@@ -1,13 +1,14 @@
 // trivia game
+// declaring array of questions and answers
 var myQuestions = [
     {
       question: "The answer is a?",
-      answers: {
-        a: "aaa",
-        b: "bbb",
-        c: "ccc"
-      },
-      correctAnswer: "a"
+      answers: [
+       "aaa",
+       "bbb",
+       "ccc"
+      ],
+      correctAnswer: "aaa"
     },
     {
       question: "The answer is c?",
@@ -16,56 +17,63 @@ var myQuestions = [
         "bbbb",
         "cccc"
       ],
-      correctAnswer: "c"
+      correctAnswer: "cccc"
     },
     {
       question: "The answer is d?",
-      answers: {
-        a: "aaaaa",
-        b: "bbbbb",
-        c: "ccccc",
-        d: "ddddd"
-      },
-      correctAnswer: "d"
+      answers: [
+        "aaaaa",
+        "bbbbb",
+        "ccccc",
+        "ddddd"
+      ],
+      correctAnswer: "ddddd"
     }
   ];
 
 var quizContainer = $("#quiz");
 var resultsContainer = $("#results");
-var index = 0;
-var quizEnd;
+var index = 0;  // keeps track of which question the user is on
+var quizEnd;  // boolean variable to help reset quiz on last question
+var userChoice;  // stores user's answer to check against correctAnswer
+var correctChoices;  // for keeping score
 
-function createQuiz() {
-   if (index < myQuestions.length) {
-     quizEnd = false; 
-   } else {
-     quizEnd = true;
-   }
-   if (quizEnd === false) {
-      quizContainer.append(myQuestions[index].question);
+// displays a question and its answers
+  function createQuestions() {
+      quizContainer.text(myQuestions[index].question);
       renderButtons();
-      index++;
    }
-}
 
-function showResults() {
-// will show the answer
-}
-
-function renderButtons() {
+function renderButtons() {  // renders the answer buttons
   $("#buttons-view").empty();
-  for (var i = 0; i < myQuestions.length; i++) {
-    var btn = $("<button>");
-    btn.addClass("quiz-btn");
+    for (j=0; j < myQuestions[index].answers.length; j++) {
+      var btn = $("<button>");
+      btn.addClass("quiz-btn");
+      btn.attr("data-name", myQuestions[index].answers[j]);
+      btn.text(myQuestions[index].answers[j]);
+      $("#buttons-view").append(btn, "<br>");
+    }
+  }
 
-    btn.attr("data-name", myQuestions[i].answers[j]);
-    btn.text(myQuestions[i].answers);
-    $("#buttons-view").append(btn);
+function checkAnswer() {
+  userChoice = $(this).attr("data-name");
+  $("#results").text(userChoice);
+  console.log(myQuestions[index].correctAnswer);
+  console.log(index);
+  if (userChoice === myQuestions[index].correctAnswer && index < myQuestions.length - 1) {
+    index++;
+    createQuestions();
+  } else {
+    index = 0;
+    createQuestions();
   }
 }
 
-// display quiz right away
-createQuiz();
+$(document).ready(function() { 
+  createQuestions();
 
-// on submit, show results
-//submitButton.addEventListener('click', showResults);
+
+  $(document).on("click", ".quiz-btn", checkAnswer);
+
+});
+
