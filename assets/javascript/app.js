@@ -63,6 +63,8 @@ function checkAnswer() {
   if (userChoice === myQuestions[index].correctAnswer && index < myQuestions.length - 1) {
     index++;
     createQuestions();
+  } else if (userChoice != myQuestions[index].correctAnswer && index < myQuestions.length) {
+    // do something probably
   } else {
     index = 0;
     createQuestions();
