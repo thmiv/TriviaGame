@@ -1,13 +1,36 @@
 body {
-    background: #999999;
+    background: url('../images/dogbg.jpg');
+}
+#quiz {
+    background: #D7FBF1;
+    padding: 30px;
+    margin: 60px;
+    width: 90%;
 }
 .col-md-6 {
-    border: 1px dotted darkblue;
+    /* border: 1px dotted darkblue; */
 }
-.col-md-3 {
-    border: 1px dotted darkred;
+.col-md-4 {
+    /* border: 1px dotted darkred; */
 }
-#currentWord {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
+.col-md-12 {
+    /* border: 1px dotted darkgreen; */
+    padding: 10px 0 0 0;
+    margin: 10px 0 0 0;
+}
+.col-md-1 {
+    /* border: 1px dotted darkcyan; */
+    padding: 5px;
+}
+button {
+    padding: 10px;
+    width: 350px;
+    margin: 10px;
+    background: #f7b32c;
+    border-style: none;
+}
+#next-question {
+    background: maroon;
+    color: beige;
+    font-weight: bold;
 }
